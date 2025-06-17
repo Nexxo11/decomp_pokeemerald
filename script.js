@@ -150,14 +150,33 @@ function updateLanguage() {
     document.querySelector('footer p').textContent = translations[currentLanguage].copyright;
 }
 
-asideButton.addEventListener("click", () => {
-    aside.style.display = "flex";
-    main.style.display = "none";
+let asideState = 0;
 
-    container.style.gridTemplateAreas = `
-    "header header header"
-    "aside aside aside"
-    "button footer footer"
+asideButton.addEventListener("click", () => {
+
+    if (asideState === 0){
+        aside.style.display = "flex";
+        main.style.display = "none";
+
+        container.style.gridTemplateAreas = `
+        "header header header"
+        "aside aside aside"
+        "button footer footer"
     `
+    asideState = 1
+    }
+    else {
+        aside.style.display = "none";
+        main.style.display = "flex";
+
+        container.style.gridTemplateAreas = `
+        "header header header"
+        "main main main"
+        "button footer footer"
+    `
+    asideState = 0
+    }
+
+
 
 })

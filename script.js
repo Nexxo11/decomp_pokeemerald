@@ -1,4 +1,8 @@
-console.log('Script cargado');
+
+const asideButton = document.getElementById("display-aside")
+const aside = document.getElementById("aside-id")
+const container = document.getElementById("container")
+const main = document.getElementById("main")
 
 const syncPointer = ({ x: pointerX, y: pointerY }) => {
   const x = pointerX.toFixed(2);
@@ -18,14 +22,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const menuLinks = document.querySelectorAll('aside ul li a');
     const sections = document.querySelectorAll('main section');
     
-    // Función para mostrar una sección específica
     const showSection = (sectionId) => {
         sections.forEach(section => {
             section.style.display = section.id === sectionId ? 'block' : 'none';
         });
     };
 
-    // Mostrar la sección correspondiente al enlace activo por defecto
     const activeLink = document.querySelector('aside ul li a.active');
     if (activeLink) {
         showSection(activeLink.id);
@@ -35,13 +37,10 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Remover la clase active de todos los enlaces
             menuLinks.forEach(l => l.classList.remove('active'));
             
-            // Agregar la clase active al enlace clickeado
             e.currentTarget.classList.add('active');
 
-            // Mostrar la sección correspondiente
             const sectionId = e.currentTarget.id;
             showSection(sectionId);
         });
@@ -58,7 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inicializar el idioma al cargar la página
     updateLanguage();
 });
 
@@ -73,7 +71,8 @@ const translations = {
         compatibleWith: "Compatible with",
         copyright: "Copyright © 2025 - Nexxo",
 
-        // Tutorial: Adding Overworlds
+
+
         selectFolder: "Select your Pokeemerald Expansion folder using Axolote Ow Adder.",
         configureProject: "When this window appears, you need to configure your project. Normally, if your project is Pokeemerald-Expansion, you can leave the settings as they are and simply click 'Complete'.",
         placeOwSprite: "Once your project is loaded, go to the Pokeemerald-Expansion folder, follow the path below, and place your Overworld sprite there:",
@@ -110,7 +109,6 @@ const translations = {
 let currentLanguage = 'en';
 
 function updateLanguage() {
-    // Actualizar elementos con atributo data-i18n
     document.querySelectorAll('[data-i18n]').forEach(element => {
         const key = element.getAttribute('data-i18n');
         if (translations[currentLanguage][key]) {
@@ -122,7 +120,6 @@ function updateLanguage() {
         }
     });
 
-    // Actualizar elementos con atributo data-i18n-placeholder
     document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
         const key = element.getAttribute('data-i18n-placeholder');
         if (translations[currentLanguage][key]) {
@@ -130,7 +127,6 @@ function updateLanguage() {
         }
     });
 
-    // Actualizar elementos con atributo data-i18n-title
     document.querySelectorAll('[data-i18n-title]').forEach(element => {
         const key = element.getAttribute('data-i18n-title');
         if (translations[currentLanguage][key]) {
@@ -138,7 +134,6 @@ function updateLanguage() {
         }
     });
 
-    // Actualizar elementos con atributo data-i18n-alt
     document.querySelectorAll('[data-i18n-alt]').forEach(element => {
         const key = element.getAttribute('data-i18n-alt');
         if (translations[currentLanguage][key]) {
@@ -154,3 +149,15 @@ function updateLanguage() {
 
     document.querySelector('footer p').textContent = translations[currentLanguage].copyright;
 }
+
+asideButton.addEventListener("click", () => {
+    aside.style.display = "flex";
+    main.style.display = "none";
+
+    container.style.gridTemplateAreas = `
+    "header header header"
+    "aside aside aside"
+    "button footer footer"
+    `
+
+})

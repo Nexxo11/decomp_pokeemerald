@@ -1,0 +1,344 @@
+:root {
+  --x: 0;
+  --y: 0;
+  --xp: 0;
+  --yp: 0;
+  --hue: calc(180 + (var(--xp) * 100));
+background-color: #0c0c0cf5;
+background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23121212' fill-opacity='0.4' fill-rule='evenodd'%3E%3Ccircle cx='3' cy='3' r='3'/%3E%3Ccircle cx='13' cy='13' r='3'/%3E%3C/g%3E%3C/svg%3E");
+  --size: 800px;
+
+  --glow: radial-gradient(
+    50% 50% at center,
+    hsl(var(--hue) 100% 70% / 0.8),
+    transparent
+  )
+  calc((var(--x) * 1px) - (var(--size) * 0.5))
+  calc((var(--y) * 1px) - (var(--size) * 0.5)) /
+  var(--size) var(--size)
+  no-repeat fixed;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 10px
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+  opacity: 0.8;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: rgba(255, 255, 255, 0.5);
+  opacity: 1;
+}
+
+body {
+  background: var(--bg);
+  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr;
+  grid-template-rows: 1fr 5fr 0.5fr;
+  grid-template-areas:
+    "header header header"
+    "main main main"
+    "button footer footer";
+  gap: 20px;
+  width: 90%;
+  height: 100vh;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+aside {
+  display: none;
+}
+
+header, aside, main, footer, .display-aside {
+  position: relative;
+  padding: 15px;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(#121212, #121212) padding-box,
+    var(--glow),
+    linear-gradient(#333, #333) border-box;
+  border-radius: 22px;
+  transition: background-size 0.2s ease;
+}
+
+header {
+  grid-area: header;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  img{
+    width: 50px;
+  }
+
+  transition: box-shadow 500ms ease;
+
+  &:hover {
+  box-shadow: 0 0 10px rgba(92, 92, 92, 0.5);
+}}
+
+aside {
+  grid-area: aside;
+  overflow: auto;
+  transition: box-shadow 500ms ease;
+
+
+  &:hover {
+  box-shadow: 0 0 10px rgba(92, 92, 92, 0.5);
+}}
+
+main {
+  padding: 20px;
+  grid-area: main;
+  overflow: auto;
+  transition: box-shadow 500ms ease;
+
+
+  &:hover {
+  box-shadow: 0 0 10px rgba(92, 92, 92, 0.5);
+}
+}
+
+main section {
+  display: none;
+}
+
+main section:first-child {
+  display: block;
+}
+
+footer {
+  grid-area: footer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px 0 20px;
+
+  a{
+    text-decoration: none;
+    color: #858585;
+    padding: 10px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  transition: box-shadow 500ms ease;
+
+  &:hover {
+  box-shadow: 0 0 10px rgba(92, 92, 92, 0.5);
+}
+}
+
+svg {
+  transition: color 400ms ease;
+}
+
+a{
+    transition: transform 400ms ease;
+}
+
+a:hover{
+  transform: scale(1.1);
+  svg{
+  color: #ffffff;
+}}
+
+.lenguage-selector{
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  
+}
+
+#lenguage-button{
+  background-color: transparent;
+  color: #858585;
+  border: none;
+  cursor: pointer;
+  &:hover{
+    color: #ffffff;
+  }
+}
+
+.display-aside {
+  grid-area: button;
+  background-color: #333;
+  border-radius: 12px;
+
+  &:active {
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+}
+
+
+@media (width > 600px) {
+  .container {
+    grid-template-columns: 2fr 3fr minmax(200px, 3fr);
+    grid-template-rows: 
+    1fr 
+    5fr 
+    0.5fr;
+      grid-template-areas:
+    "header header header"
+    "aside main main"
+    "footer footer footer";
+  }
+  aside {
+    display: block;
+  }
+
+  .display-aside {
+    display: none;
+  }
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+li {
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #3333336e;
+
+  a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #33333379;
+  }
+
+  &:hover {
+    background-color: #444;
+  }
+
+  a.active {
+    background-color: #444;
+    color: #ffffff;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  }
+}
+
+/* Tutoriales */
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title h2 {
+  font-size: 18px;
+}
+
+.requirements-list{
+  max-width: 30%;
+}
+
+.requirements-list li:hover{
+  background-color: #33333379;
+}
+
+.requirements-list li a{
+  text-decoration: none;
+  color: #858585;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #33333379;
+
+  &:hover{
+    background-color: #444;
+  }
+}
+
+.requirements-list li span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main img{
+  border-radius: 15px;
+}
+
+#add-new-overworlds{
+  h1{
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+  }
+  span{
+    font-size: 18px;
+    color: #dfdfdf;
+  }
+}
+
+hr {
+  border: none;
+  height: 2px;
+  background-color: #444;
+}
+
+.divider-vertical {
+  width: 2px;
+  height: 50px;
+  background: #444;
+  margin: 0 20px;
+}
+
+code {
+  background: linear-gradient(145deg, #2a2a2a, #3a3a3a);
+  color: #e0e0e0;
+  border: 1px solid #5e5e5e;
+  border-radius: 12px;
+  padding: 12px 16px;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  display: inline-block;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+code:hover {
+  transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}

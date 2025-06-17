@@ -164,6 +164,8 @@ asideButton.addEventListener("click", () => {
         "button footer footer"
     `
     asideState = 1
+    asideButton.style.color = "#fff"
+
     }
     else {
         aside.style.display = "none";
@@ -175,6 +177,7 @@ asideButton.addEventListener("click", () => {
         "button footer footer"
     `
     asideState = 0
+    asideButton.style.color = "#5e5e5e"
     }
 
 
